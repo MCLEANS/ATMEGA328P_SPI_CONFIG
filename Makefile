@@ -6,11 +6,14 @@ CC = avr-g++
 CFLAGS = -Os -D F_CPU=16000000 -mmcu=$(MCU) 
 LFLAGS = -D F_CPU=16000000 -mmcu=$(MCU) 
 
+SOURCES = SPI.cpp
+OBJS = SPI.o
+
 
 
 all :
-	$(CC) $(CFLAGS) -c $(TARGET).cpp
-	$(CC) $(LFLAGS) -o $(TARGET).elf $(TARGET).o
+	$(CC) $(CFLAGS) -c $(TARGET).cpp $(SOURCES)
+	$(CC) $(LFLAGS) -o $(TARGET).elf $(TARGET).o $(OBJS)
 	avr-objcopy -O ihex $(TARGET).elf $(TARGET).hex
 	avr-size --format=avr --mcu=$(MCU) $(TARGET).elf
 
