@@ -24,7 +24,8 @@ void init_spi_master(){
 	//Enable master mode
 	//set clock frequency to fosc/16
 	//Enable the SPI
-	SPCR |= (1<<MSTR)|(1<<SPR0)|(1<<SPE);
+	//CPOL = 0, CPHA = 0
+	SPCR |= (1<<MSTR)|(1<<SPR1)|(1<<SPE);
 	
 }
 
@@ -37,20 +38,18 @@ int main(void)
 	DDRC = 0b11111111;
 	SS_PORT_DIRECTION |= (1<<SS_PIN);
 	
-	char sent_bytes = 0b10000000;
+	char sent_bytes = 'H';
+
+	SS_PORT &= ~(1<<SS_PIN);
+		SPDR = sent_bytes;
+		while(!(SPSR & (1<< SPIF)));
+		SS_PORT |=(1<<SS_PIN);
 							
 	
 	while (1)
 	{
-		SS_PORT &= ~(1<<SS_PIN);
-		SPDR = sent_bytes;
-		while(!(SPSR & (1<< SPIF)));
-		SS_PORT |=(1<<SS_PIN);
 		
-	
-			
 	}
 		
-
 }
 
