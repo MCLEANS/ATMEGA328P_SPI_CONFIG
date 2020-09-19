@@ -2,8 +2,10 @@
 
 
 
-SPI::SPI(bool phase,bool polarity):phase(phase),
-                                    polarity(polarity){
+SPI::SPI(uint8_t _SPI,bool phase,bool polarity,uint8_t prescaler):_SPI(_SPI),
+												phase(phase),
+                                    			polarity(polarity),
+												prescaler(prescaler){
     //set MOSI AND SCK to output
 	MOSI_PORT_DIRECTION |= (1<<MOSI_PIN);
 	SCLK_PORT_DIRECTION |= (1<<SCLK_PIN);

@@ -16,12 +16,14 @@
 
 class SPI{
     private:
+        uint8_t _SPI;
         bool phase;
-        bool polarity;        
+        bool polarity; 
+        uint8_t prescaler;       
     private:
     public:
     public:
-        SPI(bool phase,bool polarity);
+        SPI(uint8_t _SPI = 1,bool phase,bool polarity,uint8_t prescaler);
         void transmit(uint8_t data);
         ~SPI();
 };
