@@ -11,20 +11,21 @@
 #define SS_PORT PORTB
 #define SS_PIN PINB2
 
-namespace custom_libraries{
+
+    
 
 class SPI{
     private:
-        
+        bool phase;
+        bool polarity;        
     private:
     public:
     public:
-        SPI();
+        SPI(bool phase,bool polarity);
         void transmit(uint8_t data);
         ~SPI();
 };
 
-}
 
 
 

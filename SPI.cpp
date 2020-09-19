@@ -1,6 +1,6 @@
 #include "SPI.h"
 
-namespace custom_libraies{
+
 
 SPI::SPI(bool phase,bool polarity):phase(phase),
                                     polarity(polarity){
@@ -16,7 +16,7 @@ SPI::SPI(bool phase,bool polarity):phase(phase),
 }
 
 void SPI::transmit(uint8_t data){
-    SPDR = sent_bytes;
+    SPDR = data;
 	while(!(SPSR & (1<< SPIF)));
 }
 
@@ -24,4 +24,3 @@ SPI::~SPI(){
 
 }
 
-}
