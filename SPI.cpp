@@ -66,6 +66,14 @@ SPI::SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST):prescaler(pre
 		SPCR &= ~(1<<CPHA);
 	}
 
+	//set byte order MSB or LSB first
+	if(this->LSBFIRST){
+		SPCR |= (1<<DORD);
+	}
+	else{
+		SPCR &= ~(1<<DORD);
+	}
+
 	//Enable the SPI
 	SPCR |= (1<<SPE);                                    
                                         
