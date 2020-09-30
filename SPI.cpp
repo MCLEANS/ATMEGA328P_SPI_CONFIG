@@ -6,7 +6,7 @@ SPI::SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST):prescaler(pre
 																	phase(phase),
 																	polarity(polarity),
 																	LSBFIRST(LSBFIRST){
-    //set MOSI AND SCK to output
+ /*   //set MOSI AND SCK to output
 	MOSI_PORT_DIRECTION |= (1<<MOSI_PIN);
 	SCLK_PORT_DIRECTION |= (1<<SCLK_PIN);
 	//set MISO pin to Input
@@ -75,18 +75,26 @@ SPI::SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST):prescaler(pre
 	}
 
 	//Enable the SPI
-	SPCR |= (1<<SPE);                                    
+	SPCR |= (1<<SPE);   
+*/
+MOSI_PORT_DIRECTION |= (1<<MOSI_PIN);
+	SCLK_PORT_DIRECTION |= (1<<SCLK_PIN);
+	//Enable master mode
+	//set clock frequency to fosc/64
+	//Enable the SPI
+	//CPOL = 0, CPHA = 0
+	SPCR |= (1<<MSTR)|(1<<SPR1)|(1<<SPE);                                 
                                         
 }
 
 void SPI::write(char data){
     SPDR = data;
-	while(!(SPSR & (1<< SPIF)));
+	while(!(SPSR & (1<< SPIF))){}
 }
 
 char SPI::read(char junk){
 	SPDR = junk;
-	while(!(SPSR & (1<< SPIF)));
+	while(!(SPSR & (1<< SPIF))){}
 	return SPDR;
 }
 
