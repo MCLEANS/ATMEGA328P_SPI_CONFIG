@@ -5,11 +5,10 @@
 
 #define MOSI_PORT_DIRECTION DDRB
 #define SCLK_PORT_DIRECTION DDRB
+#define MISO_PORT_DIRECTION DDRB
 #define MOSI_PIN PINB3
 #define SCLK_PIN PINB5
-#define SS_PORT_DIRECTION DDRB
-#define SS_PORT PORTB
-#define SS_PIN PINB2
+#define MISO_PIN PINB4
 
 
 namespace custom_libraries{
@@ -24,7 +23,8 @@ class SPI{
     public:
     public:
         SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST);
-        void write(uint8_t data);
+        void write(char data);
+        char read(char junk);
         ~SPI();
 };
 
