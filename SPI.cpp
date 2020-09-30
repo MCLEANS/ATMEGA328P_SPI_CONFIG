@@ -1,11 +1,11 @@
 #include "SPI.h"
 
+namespace custom_libraries{
 
-
-SPI::SPI(uint8_t _SPI,bool phase,bool polarity,uint8_t prescaler):_SPI(_SPI),
-												phase(phase),
-                                    			polarity(polarity),
-												prescaler(prescaler){
+SPI::SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST):prescaler(prescaler),
+																	phase(phase),
+																	polarity(polarity),
+																	LSBFIRST(LSBFIRST){
     //set MOSI AND SCK to output
 	MOSI_PORT_DIRECTION |= (1<<MOSI_PIN);
 	SCLK_PORT_DIRECTION |= (1<<SCLK_PIN);
@@ -17,7 +17,7 @@ SPI::SPI(uint8_t _SPI,bool phase,bool polarity,uint8_t prescaler):_SPI(_SPI),
                                         
 }
 
-void SPI::transmit(uint8_t data){
+void SPI::write(uint8_t data){
     SPDR = data;
 	while(!(SPSR & (1<< SPIF)));
 }
@@ -25,4 +25,8 @@ void SPI::transmit(uint8_t data){
 SPI::~SPI(){
 
 }
+
+
+}
+
 

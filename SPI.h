@@ -12,23 +12,22 @@
 #define SS_PIN PINB2
 
 
-    
-
+namespace custom_libraries{
 class SPI{
     private:
-        uint8_t _SPI;
+        uint8_t prescaler; 
         bool phase;
         bool polarity; 
-        uint8_t prescaler;       
+        bool LSBFIRST;
+              
     private:
     public:
     public:
-        SPI(uint8_t _SPI = 1,bool phase,bool polarity,uint8_t prescaler);
-        void transmit(uint8_t data);
+        SPI(uint8_t prescaler,bool phase,bool polarity,bool LSBFIRST);
+        void write(uint8_t data);
         ~SPI();
 };
 
-
-
+}
 
 #endif //_SPI_H
